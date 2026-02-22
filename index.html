@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School 44 | Digital Dashboard</title>
+    <style>
+        /* 1. БАЗОВІ НАЛАШТУВАННЯ ТА НЕОНОВИЙ ФОН */
+        :root {
+            --black-bg: #0a0a0a;
+            --white-text: #f5f5f5;
+            --neon-cyan: #00e5ff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: var(--black-bg);
+            color: var(--white-text);
+            overflow-x: hidden;
+        }
+
+        /* Анімований чорно-білий фон */
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #333333, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* 2. ГОЛОВНА КАРТКА (HEADER) */
+        .main-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-card h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin: 0;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            font-size: 0.9rem;
+            color: var(--neon-cyan);
+        }
+
+        /* 3. DASHBOARD GRID (КАРТКИ) */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .info-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+        }
+
+        .info-card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .btn-action {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid var(--white-text);
+            color: var(--white-text);
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .info-card:hover .btn-action {
+            background: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Адаптація під мобілки */
+        @media (max-width: 600px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <header class="main-card">
+            <h1>School 44 DIGITAL</h1>
+            <div class="status-badge">SYSTEM OPERATIONAL</div>
+            <p style="margin-top: 20px; opacity: 0.8;">Цифрова екосистема школи. Бета-версія 1.0</p>
+            <p id="timer" style="color: var(--neon-cyan); font-weight: bold; margin-top: 10px;"></p>
+        </header>
+
+        <main class="dashboard-grid">
+            <div class="info-card">
+                <h3>Вчителі</h3>
+                <div style="display: flex; justify-content: center; margin-top: 15px;">
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; border: 1px solid var(--neon-cyan); width: 140px;">
+                        <div
+                            style="width: 60px; height: 60px; background: #333; border-radius: 50%; margin: 0 auto 10px; overflow: hidden; border: 2px solid var(--neon-cyan);">
+                            <img src="director.img/admin.jpg.png" alt="класний керівник учня який зробив цей сайт"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <span style="font-size: 0.8rem; font-weight: bold;">Сухоцька Зоряна Богданівна</span>
+                        <p style="font-size: 0.7rem; opacity: 0.7; margin: 5px 0 0;">Керівничка</p>
+                    </div>
+                </div>
+                <button class="btn-action">Весь список</button>
+            </div>
+
+            <div class="info-card">
+                <h3>Події</h3>
+                <p>Останні новини та Facebook-стрічка</p>
+                <button class="btn-action"
+                    onclick="window.open('https://www.facebook.com/groups/530395490818937/?locale=uk_UA')">
+                    Дивитись
+                </button>
+
+            </div>
+
+            <div class="info-card">
+                <h3>Розклад</h3>
+                <p>головна сторінка НІТ</p>
+                <button class="btn-action" onclick="window.open('https://app.nit.school/dashboard')">Відкрити</button>
+
+
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const releaseDate = new Date('March 5, 2026 09:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = releaseDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+            const timerElement = document.getElementById('timer');
+            if (timerElement) {
+                timerElement.innerText = `До повного релізу: ${days}д ${hours}г`;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+
+</html>
